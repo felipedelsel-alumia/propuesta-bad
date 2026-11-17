@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Propuesta de redes BAD 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=Urbanist:wght@400;600;800&family=Archivo+Black&family=Inter:wght@400;700&family=League+Spartan:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Marco en Alumia: violeta profundo de fondo, verde ácido de acento, Archivo Black enorme,
+     etiquetas técnicas en Roboto Mono. Los mockups conservan la marca de BAD (rosa, azul, negro). */
+  --ink:#67209b;
+  --ink-2:#4f1779;
+  --acid:#c2ff00;
+  --paper:#f2f2f2;
+  --pink:#ea7ee3;
+  --blue:#4489ec;
+  --mute:rgba(255,255,255,.68);
+  --line:rgba(255,255,255,.22);
+  --display:"Archivo","Arial Black","Helvetica Neue",Arial,sans-serif;
+  --adisplay:"Archivo Black","Arial Black",Impact,sans-serif;
+  --sub:"League Spartan","Arial Narrow",Arial,sans-serif;
+  --mono:"Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+  --body:"Inter","Helvetica Neue",Arial,sans-serif;
+  --badbody:"Urbanist","Avenir Next","Segoe UI",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#fff;font-family:var(--body);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+.d{font-family:var(--display);font-stretch:125%;font-weight:900;line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.a{font-family:var(--adisplay);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:-.015em;text-wrap:balance}
+.ac{color:var(--acid)}
+.h3a{font-family:var(--body);font-weight:700}
+.mock,.phone{font-family:var(--badbody)}
+.stripes,.mock.stripes,.hl i.stripes{background:repeating-linear-gradient(115deg,var(--pink) 0 7px,var(--blue) 7px 13px)}
+
+/* ---------- diapositivas ---------- */
+section{padding:clamp(48px,8vw,104px) clamp(18px,5vw,64px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(28px,4vw,48px)}
+.eyebrow{font-family:var(--mono);font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acid)}
+.eyebrow::before{content:"[ "}.eyebrow::after{content:" ]"}
+h2{font-size:clamp(2.2rem,6.4vw,5rem)}
+.lede{max-width:50ch;font-family:var(--sub);font-weight:700;font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.2;color:#fff}
+.head{display:flex;flex-direction:column;gap:14px}
+.note{color:var(--mute);font-size:.92rem;max-width:65ch}
+
+/* bloques del manual */
+.blk{display:inline-block;background:#000;color:var(--pink);padding:.12em .38em .16em;box-shadow:.16em .16em 0 var(--blue)}
+.blk.w{background:var(--paper);color:#000;box-shadow:.16em .16em 0 #000}
+.blk.b{background:var(--blue);color:var(--paper);box-shadow:.16em .16em 0 #000}
+.blk.p{background:var(--pink);color:#000;box-shadow:.16em .16em 0 #000}
+.stack{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.stack > *:nth-child(2){margin-left:.9em}
+.stack > *:nth-child(3){margin-left:.3em}
+.stack > *:nth-child(4){margin-left:1.5em}
+
+/* ---------- portada ---------- */
+#portada{position:relative;padding:0;overflow:hidden}
+#portada .bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(103,32,155,.80),rgba(103,32,155,.94)),url(img-01.jpg) center 38%/cover}
+#portada .wrap{position:relative;max-width:none;padding:clamp(22px,3vw,40px) clamp(18px,3vw,44px) clamp(26px,3vw,40px);gap:clamp(36px,7vw,90px)}
+#portada .top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+#portada .top img{width:clamp(96px,11vw,150px)}
+#portada h1{font-size:clamp(3rem,12.4vw,11.5rem);line-height:.86;margin-left:-.04em}
+.tech{font-family:var(--mono);font-weight:700;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acid)}
+.blank{display:inline-block;min-width:9em;border-bottom:2px dashed var(--acid);color:var(--acid);font-weight:700;padding:0 .2em}
+.meta{display:flex;gap:10px 28px;flex-wrap:wrap;font-family:var(--mono);font-size:.85rem;color:#fff}
+.meta b{color:var(--acid);font-weight:700;text-transform:uppercase}
+.who{font-family:var(--mono);font-weight:700;font-size:.85rem;text-transform:uppercase;color:#fff}
+
+/* ---------- punto de partida ---------- */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.fact{border-top:3px solid var(--acid);padding-top:14px;display:flex;flex-direction:column;gap:6px}
+
+.fact strong{font-family:var(--body);font-weight:700;font-size:1.15rem;line-height:1.2}
+.fact span{color:rgba(255,255,255,.86);font-size:.98rem}
+.idea{font-size:clamp(1.8rem,5.4vw,4.2rem)}
+
+/* ---------- líneas ---------- */
+.lines{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.linea{background:var(--ink-2);padding:22px;display:flex;flex-direction:column;gap:10px;border-left:6px solid var(--acid)}
+
+.linea h3{font-size:1.25rem}
+.linea p{color:rgba(255,255,255,.86);font-size:.98rem}
+.linea small{color:var(--acid);font-family:var(--mono);font-size:.78rem}
+
+/* fases */
+.fases{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.fase{background:var(--ink-2);padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;border-top:4px solid var(--line)}
+.fase b{font-weight:700;font-size:1rem}
+.fase span{font-size:.9rem;color:rgba(255,255,255,.86)}
+.fase small{color:var(--acid);font-family:var(--mono);font-weight:700;text-transform:uppercase;font-size:.74rem}
+.fase.hot{border-color:var(--acid);background:#3a0f5c}
+@media(max-width:820px){.fases{grid-template-columns:1fr}}
+
+/* ---------- mockups: base ---------- */
+.mock{container-type:inline-size;position:relative;overflow:hidden;background:#000 center/cover;color:var(--paper)}
+.mock .in{position:absolute;inset:0;padding:7cqw;display:flex;flex-direction:column;justify-content:flex-end;gap:3cqw}
+.mock .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 35%,rgba(0,0,0,.72) 100%)}
+.mock .lg{position:absolute;top:6cqw;left:6cqw;width:22cqw}
+.mock .tag{font-weight:800;font-size:3.6cqw;letter-spacing:.12em;text-transform:uppercase}
+.mock .t{font-size:11cqw}
+.mock .s{font-weight:600;font-size:4.4cqw;line-height:1.25}
+.r34{aspect-ratio:3/4}.r45{aspect-ratio:4/5}.r916{aspect-ratio:9/16}
+.solid-p,.hl i.solid-p{background:var(--pink);color:#000}.solid-b,.hl i.solid-b{background:var(--blue)}.solid-w{background:var(--paper);color:#000}.solid-k{background:#000}
+
+/* ---------- grilla ---------- */
+.gridrow{display:grid;grid-template-columns:minmax(280px,400px) 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+@media(max-width:860px){.gridrow{grid-template-columns:1fr}.phone{margin:0 auto}}
+.phone{width:100%;max-width:400px;background:#000;border:2px solid #3a3441;border-radius:34px;padding:16px 10px 12px;font-size:13px}
+.ph-top{display:flex;align-items:center;gap:14px;padding:6px 8px 12px}
+.ava{width:68px;height:68px;border-radius:50%;flex:none;display:grid;place-items:center;padding:3px;background:linear-gradient(135deg,var(--pink),var(--blue))}
+.ava div{width:100%;height:100%;border-radius:50%;background:var(--pink);display:grid;place-items:center;border:3px solid #000}
+.ava img{width:78%}
+.ph-top b{font-size:15px;display:block}
+.ph-top span{color:rgba(255,255,255,.86);line-height:1.3;display:block}
+.hl{display:flex;gap:12px;padding:4px 8px 14px;overflow:hidden}
+.hl div{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.86)}
+.hl i{width:52px;height:52px;border-radius:50%;border:2px solid #3a3441;background:#000 center/cover;display:block}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.feed .mock .in{padding:8cqw}
+.feed .mock .t{font-size:13cqw}
+.feed .mock .tag{font-size:6.2cqw}
+.feed .mock .s{font-size:7cqw}
+.feed .mock .lg{width:34cqw;top:8cqw;left:8cqw}
+.legend{display:flex;flex-direction:column;gap:20px}
+.legend li{list-style:none;display:flex;gap:14px;align-items:flex-start}
+.legend ul{display:flex;flex-direction:column;gap:16px;padding:0}
+.sw{width:18px;height:18px;flex:none;margin-top:5px}
+.legend b{display:block}
+.legend span{color:rgba(255,255,255,.86);font-size:.98rem}
+
+/* ---------- piezas ---------- */
+.pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.piece{display:flex;flex-direction:column;gap:12px}
+.piece figcaption b{display:block;font-size:1rem}
+.piece figcaption span{color:rgba(255,255,255,.86);font-size:.92rem;line-height:1.4;display:block}
+.fan{position:absolute;inset:0}
+.fan > div{position:absolute;width:62%;aspect-ratio:4/5;padding:5cqw;display:flex;flex-direction:column;justify-content:flex-end;gap:2cqw;box-shadow:0 0 0 .8cqw #000}
+.fan > div:nth-child(1){left:6%;top:9%;transform:rotate(-5deg)}
+.fan > div:nth-child(2){left:20%;top:15%;transform:rotate(1deg)}
+.fan > div:nth-child(3){left:33%;top:21%;transform:rotate(6deg)}
+.ph{border:.7cqw dashed var(--pink);padding:1.5cqw 3cqw;font-size:7cqw;color:var(--pink);align-self:flex-start}
+
+/* ---------- stories y reels ---------- */
+.vert{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px}
+.vert .mock{border-radius:14px}
+.bar{position:absolute;top:3cqw;left:4cqw;right:4cqw;height:.9cqw;background:rgba(255,255,255,.3);border-radius:9px}
+.bar::after{content:"";position:absolute;left:0;top:0;bottom:0;width:45%;background:#fff;border-radius:9px}
+.stk{align-self:center;background:#fff;color:#000;border-radius:3cqw;padding:2.4cqw 5cqw;font-weight:800;font-size:5cqw;display:flex;gap:2cqw;align-items:center}
+.poll{align-self:stretch;background:#fff;color:#000;border-radius:4cqw;padding:4cqw;display:flex;flex-direction:column;gap:3cqw;font-weight:800;font-size:5.2cqw;text-align:center}
+.poll div{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
+.poll i{font-style:normal;border-radius:2.4cqw;padding:2.6cqw 0;background:var(--pink)}
+.poll i + i{background:var(--blue);color:#fff}
+.count{align-self:stretch;background:#000;border-radius:4cqw;padding:4cqw;text-align:center;display:flex;flex-direction:column;gap:2cqw}
+.count b{font-size:4.6cqw;letter-spacing:.1em;text-transform:uppercase;font-weight:800}
+.count div{display:grid;grid-template-columns:repeat(3,1fr);gap:2cqw;font-size:11cqw}
+.count div span{background:#1d1822;border-radius:2cqw;padding:2cqw 0}
+.count small{font-size:3.6cqw;color:var(--mute);font-weight:600}
+.safe{position:absolute;left:0;right:0;top:50%;aspect-ratio:3/4;transform:translateY(-50%);border-top:.5cqw dashed rgba(255,255,255,.4);border-bottom:.5cqw dashed rgba(255,255,255,.4);pointer-events:none}
+.num{font-size:26cqw;line-height:.85}
+.subh{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.subh h3{font-size:1.3rem}
+.subh span{color:var(--mute);font-size:.92rem}
+
+/* ---------- videos ---------- */
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.vid{display:flex;flex-direction:column;gap:12px}
+.vid video{width:100%;aspect-ratio:9/16;background:#000;border-radius:14px}
+.vid b{display:block}
+.vid span{color:rgba(255,255,255,.86);font-size:.94rem;display:block}
+
+/* ---------- fee ---------- */
+.fee{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,48px);align-items:start}
+@media(max-width:860px){.fee{grid-template-columns:1fr}}
+.price{position:relative;padding:5px;background:var(--acid)}
+.price .card{background:var(--ink-2);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:18px}
+.price .amt{font-size:clamp(1.8rem,4.2vw,3rem);display:flex;align-items:baseline;gap:.3em;flex-wrap:wrap}
+.price .amt .blank{min-width:5em;font-family:var(--body);font-size:.5em}
+.price .amt small{font-family:var(--body);font-weight:400;font-size:.36em;color:var(--mute);letter-spacing:0;text-transform:none;line-height:1.3}
+.inc{display:flex;flex-direction:column;gap:10px;padding:0}
+.inc li{list-style:none;padding-left:26px;position:relative;font-size:1rem}
+.inc li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:8px;background:var(--acid)}
+.inc.out li{color:var(--mute)}
+.inc.out li::before{background:none;border:2px solid var(--mute);height:8px}
+.cmp{width:100%;border-collapse:collapse;font-size:.98rem}
+.cmp th,.cmp td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp thead th{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;color:var(--mute);font-weight:700}
+.cmp thead th:last-child{color:var(--acid)}
+.cmp td:first-child{color:var(--mute);font-weight:600;white-space:nowrap}
+.cmp td:last-child{font-weight:700;color:var(--acid)}
+.tablebox{overflow-x:auto}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.rule{display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--acid);padding-top:14px}
+.rule b{font-weight:700;font-size:1.1rem}
+.rule span{color:rgba(255,255,255,.86);font-size:.97rem}
+
+/* ---------- pasos ---------- */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;padding:0}
+.steps li{list-style:none;counter-increment:s;background:var(--ink-2);padding:22px;display:flex;flex-direction:column;gap:8px}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--adisplay);font-weight:400;font-size:2.4rem;color:var(--acid);line-height:1}
+.steps b{font-size:1.05rem}
+.steps span{color:rgba(255,255,255,.86);font-size:.97rem}
+
+/* navegación */
+.nav{position:fixed;right:16px;bottom:16px;display:flex;gap:6px;align-items:center;font-family:var(--mono);background:var(--ink-2);border:1px solid var(--line);padding:6px 8px;font-weight:800;font-size:.8rem;z-index:5}
+.nav button{background:var(--acid);color:var(--ink);border:0;width:30px;height:30px;font-weight:900;cursor:pointer;font-size:1rem}
+.nav button:focus-visible,video:focus-visible{outline:3px solid var(--acid);outline-offset:2px}
+.nav span{min-width:3.6em;text-align:center;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- 1 PORTADA -->
+<section id="portada">
+  <div class="bg"></div>
+  <div class="wrap">
+    <div class="top">
+      <img src="img-02.png" alt="BAD">
+      <img src="img-03.png" alt="Alumia Studio" style="width:clamp(170px,22vw,300px)">
+    </div>
+    <h1 class="a">Las redes<br>de BAD,<br><span class="ac">camino<br>a abril.</span></h1>
+    <div class="top">
+      <div class="meta">
+        <span><b>Para</b> Buenos Aires Dance</span>
+        <span><b>Qué</b> Estrategia, diseño y video para @isbad4you</span>
+        <span><b>Cuándo</b> De hoy a BAD 2027</span>
+      </div>
+      <div class="tech">[ Propuesta para BAD · v.1.0 ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 PUNTO DE PARTIDA -->
+<section id="partida">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Punto de partida</div>
+      <h2 class="a">La primera edición dejó material para meses.</h2>
+      <p class="lede">BAD 2026 llenó la ciudad durante seis días y quedó filmado. Ese archivo todavía no salió. De acá a abril, cada set y cada charla puede ser una razón para volver a hablar de BAD.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><strong>11 al 16 de febrero de 2026</strong><span>Charlas, workshops y expo en la Usina del Arte, como antesala de Ultra Buenos Aires.</span></div>
+      <div class="fact"><strong>La ciudad como escenario</strong><span>Richie Hawtin en la Floralis Genérica, Indira Paganotto en Caminito, Carlita en el Puente de la Mujer.</span></div>
+      <div class="fact"><strong>Sets completos filmados</strong><span>Más de una hora por artista, en 4K, con dron. Ya trabajamos sobre el de Richie.</span></div>
+      <div class="fact"><strong>Una marca con carácter</strong><span>Rosa, azul, bloques y rayas. El manual alcanza para un sistema completo de redes.</span></div>
+    </div>
+    <p class="idea a">El archivo de 2026 <span class="ac">es la campaña de 2027.</span></p>
+  </div>
+</section>
+
+<!-- 3 LÍNEAS -->
+<section id="lineas">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Qué publicamos</div>
+      <h2 class="a">Cuatro líneas de contenido.</h2>
+    </div>
+    <div class="lines">
+      <div class="linea"><h3 class="h3a">Full Sets</h3><p>Los sets de 2026 en YouTube, cada uno con sus teasers verticales y su portada de serie.</p><small>Richie Hawtin · Carlita · Indira Paganotto</small></div>
+      <div class="linea"><h3 class="h3a">Charlas</h3><p>Lo que se dijo en la Usina, cortado en piezas cortas y carruseles para quien trabaja en la industria.</p><small>Man and Machine, paneles, workshops</small></div>
+      <div class="linea"><h3 class="h3a">La ciudad</h3><p>Buenos Aires como protagonista. Los lugares donde sonó BAD y los que vienen.</p><small>Floralis · Caminito · Puente de la Mujer</small></div>
+      <div class="linea"><h3 class="h3a">Camino a abril</h3><p>Anuncios, cuenta regresiva y acreditaciones de BAD 2027, con un sistema listo para cada novedad.</p><small>Fechas, artistas, speakers, entradas</small></div>
+    </div>
+    <div class="head">
+      <div class="eyebrow">Cómo cambia el trabajo mes a mes</div>
+      <div class="fases">
+        <div class="fase"><small>Ahora</small><b>Archivo 2026</b><span>Sets completos y charlas. El feed vuelve a moverse.</span></div>
+        <div class="fase"><small>Verano</small><b>Primeros anuncios</b><span>Fechas, sedes y nombres de 2027 a medida que se confirman.</span></div>
+        <div class="fase"><small>Marzo</small><b>Cuenta regresiva</b><span>Agenda, acreditaciones, piezas diarias.</span></div>
+        <div class="fase hot"><small>Abril</small><b>Semana BAD</b><span>El pico: todo lo que pase sale el mismo día.</span></div>
+        <div class="fase"><small>Después</small><b>Recap</b><span>Material nuevo para arrancar el ciclo siguiente.</span></div>
+      </div>
+      <p class="note">El volumen de trabajo no es parejo. Por eso el presupuesto no puede contar piezas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 GRILLA -->
+<section id="grilla">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Mockup 1</div>
+      <h2 class="a">La grilla de Instagram.</h2>
+      <p class="lede">Una foto, una gráfica. El feed alterna imágenes reales de BAD con placas del manual, y se reconoce de lejos sin que el logo tenga que estar en todas.</p>
+    </div>
+    <div class="gridrow">
+      <div class="phone" aria-label="Maqueta del perfil de Instagram de BAD">
+        <div class="ph-top">
+          <div class="ava"><div><img src="img-02.png" alt=""></div></div>
+          <div><b>isbad4you</b><span>Buenos Aires Dance<br>Música electrónica, tecnología y futuro en la Ciudad.<br>Abril 2027</span></div>
+        </div>
+        <div class="hl">
+          <div><i style="background-image:url(img-04.jpg)"></i>Full Sets</div>
+          <div><i class="solid-b"></i>Charlas</div>
+          <div><i style="background-image:url(img-05.jpg)"></i>La ciudad</div>
+          <div><i class="stripes"></i>2027</div>
+          <div><i class="solid-p"></i>Entradas</div>
+        </div>
+        <div class="feed">
+          <div class="mock r34 stripes"><div class="in" style="justify-content:center;align-items:flex-start"><span class="d num blk w">100</span><span class="d blk" style="font-size:9cqw">días</span></div></div>
+          <div class="mock r34" style="background-image:url(img-04.jpg)"><div class="shade"></div><div class="in"><span class="tag">Full Set</span><span class="d t">Richie<br>&nbsp;Hawtin</span></div></div>
+          <div class="mock r34 solid-p"><div class="in" style="justify-content:center"><span class="d stack" style="font-size:12cqw"><span class="blk">¿Qué</span><span class="blk">es</span><span class="blk">BAD?</span></span></div></div>
+
+          <div class="mock r34" style="background-image:url(img-06.jpg)"><div class="in"><span class="s">Floralis Genérica</span></div></div>
+          <div class="mock r34 solid-b"><div class="in"><span class="tag">Charla</span><span class="d t" style="font-size:12cqw">Man and Machine</span></div></div>
+          <div class="mock r34" style="background-image:url(img-07.jpg)"><div class="shade"></div><div class="in"><span class="s">Así se vivió</span></div></div>
+
+          <div class="mock r34 solid-k"><div class="in" style="border:1.6cqw solid var(--pink)"><span class="tag" style="color:var(--pink)">Full Set</span><span class="d t">Carlita</span><span class="s">Puente de la Mujer</span></div></div>
+          <div class="mock r34" style="background-image:url(img-05.jpg)"><div class="shade"></div><div class="in"><span class="s">La ciudad como escenario</span></div></div>
+          <div class="mock r34 solid-k"><div class="in" style="border:1.6cqw solid var(--blue)"><span class="tag" style="color:var(--blue)">Full Set</span><span class="d t" style="font-size:11cqw">Indira Paganotto</span><span class="s">Caminito</span></div></div>
+
+          <div class="mock r34" style="background-image:url(img-08.jpg)"></div>
+          <div class="mock r34 solid-w"><div class="in" style="justify-content:space-between"><img src="img-02.png" alt="" style="width:60%"><span class="d t" style="font-size:14cqw">Abril<br>2027</span></div></div>
+          <div class="mock r34" style="background-image:url(img-09.jpg)"></div>
+        </div>
+      </div>
+      <div class="legend">
+        <ul>
+          <li><i class="sw stripes"></i><div><b>Rayas: solo para fechas</b><span>Cuenta regresiva y anuncios grandes. Si hay rayas, hay novedad.</span></div></li>
+          <li><i class="sw" style="background:#000;border:2px solid var(--pink)"></i><div><b>Negro con borde: series</b><span>Cada Full Set tiene su placa. Rosa y azul se alternan por artista.</span></div></li>
+          <li><i class="sw solid-b"></i><div><b>Azul pleno: industria</b><span>Charlas, workshops y contenido para quien trabaja en la escena.</span></div></li>
+          <li><i class="sw solid-p"></i><div><b>Rosa pleno: BAD habla</b><span>Carruseles que explican qué es BAD y cómo sumarse.</span></div></li>
+          <li><i class="sw" style="background:url(img-06.jpg) center/cover"></i><div><b>Foto limpia</b><span>Imagen real, texto mínimo, marca sutil. La misma dirección del último teaser.</span></div></li>
+        </ul>
+        <p class="note">Las fotos son fotogramas reales del set de Richie Hawtin. Las placas de Carlita e Indira usan gráfica hasta que trabajemos sobre sus sets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 PIEZAS -->
+<section id="piezas">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Mockup 2</div>
+      <h2 class="a">Piezas tipo.</h2>
+      <p class="lede">Cinco plantillas cubren casi todo lo que BAD necesita decir. Una novedad nueva entra en una plantilla y sale el mismo día.</p>
+    </div>
+    <div class="pieces">
+      <figure class="piece">
+        <div class="mock r45" style="background-image:url(img-04.jpg)"><div class="shade"></div><img class="lg" src="img-02.png" alt=""><div class="in"><span class="tag" style="color:var(--pink)">Full Set · ya en YouTube</span><span class="d t">Richie<br>&nbsp;&nbsp;Hawtin</span><span class="s">Floralis Genérica<br>Buenos Aires, febrero 2026</span></div></div>
+        <figcaption><b>Lanzamiento de set</b><span>Foto real, nombre en la tipografía de BAD, logo chico.</span></figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="mock r45 stripes"><div class="in" style="justify-content:center;align-items:flex-start;gap:0"><span class="d blk w" style="font-size:34cqw;line-height:.9">100</span><span class="d blk" style="font-size:9cqw;margin-left:8cqw">días para</span><span class="d blk p" style="font-size:9cqw;margin-left:3cqw">BAD 2027</span></div></div>
+        <figcaption><b>Cuenta regresiva</b><span>El número cambia, el sistema queda. Sirve para 100, 50, 30, 7 y 1.</span></figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="mock r45 solid-b"><div class="in" style="justify-content:space-between"><span class="tag">Charla completa</span><div style="display:flex;flex-direction:column;gap:4cqw"><span class="d stack" style="font-size:11cqw"><span class="blk w">Man</span><span class="blk w">and</span><span class="blk w">Machine</span></span><span class="s">Richie Hawtin<br>Usina del Arte, BAD 2026</span></div></div></div>
+        <figcaption><b>Charla</b><span>Título de la charla al frente. La línea de industria se distingue por el azul.</span></figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="mock r45 solid-k"><div class="fan">
+          <div class="solid-p"><span class="d" style="font-size:8cqw;color:#000">¿Qué es BAD?</span></div>
+          <div class="solid-b"><span class="s" style="font-size:3.6cqw">Una semana completa de encuentros en vivo</span><span class="d" style="font-size:5.4cqw">Charlas<br>Workshops<br>Eventos especiales</span></div>
+          <div class="stripes"><span class="d blk w" style="font-size:6.4cqw;align-self:flex-start">Sumate</span><span class="d blk" style="font-size:5cqw;align-self:flex-start">Abril 2027</span></div>
+        </div></div>
+        <figcaption><b>Carrusel</b><span>Tres a seis placas para explicar algo. Textos tomados del manual de marca.</span></figcaption>
+      </figure>
+      <figure class="piece">
+        <div class="mock r45" style="background-image:url(img-06.jpg)"><div class="shade" style="background:rgba(0,0,0,.45)"></div><img class="lg" src="img-02.png" alt=""><div class="in"><span class="tag" style="color:var(--pink)">BAD 2027 · primer anuncio</span><span class="d ph">Nombre del artista</span><span class="s">Sede a confirmar<br>Abril 2027</span></div></div>
+        <figcaption><b>Anuncio de artista o speaker</b><span>Lista para completar apenas haya nombres confirmados.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6 STORIES Y REELS -->
+<section id="verticales">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Mockup 3</div>
+      <h2 class="a">Stories y portadas de Reels.</h2>
+      <p class="lede">Las stories acompañan cada publicación y le hablan a la gente. Las portadas ordenan los Reels en series, para que el perfil se pueda recorrer.</p>
+    </div>
+    <div class="subh"><h3 class="h3a">Stories</h3><span>Aviso de estreno, encuesta, cuenta regresiva</span></div>
+    <div class="vert">
+      <div class="mock r916" style="background-image:url(img-10.jpg)"><div class="shade"></div><div class="bar"></div><div class="in" style="padding-bottom:14cqw"><span class="tag" style="color:var(--pink)">Hoy</span><span class="d t">Sale el set de Richie</span><span class="stk">Ver en YouTube</span></div></div>
+      <div class="mock r916" style="background-image:url(img-07.jpg)"><div class="shade" style="background:rgba(0,0,0,.4)"></div><div class="bar"></div><div class="in" style="justify-content:center"><div class="poll">¿Estuviste en la Floralis?<div><i>Sí</i><i>Me lo perdí</i></div></div></div></div>
+      <div class="mock r916 stripes"><div class="bar"></div><div class="in" style="justify-content:center;gap:5cqw"><span class="d blk w" style="font-size:10cqw;align-self:flex-start">Guardá la fecha</span><div class="count"><b>BAD 2027</b><div class="d"><span>100</span><span>00</span><span>00</span></div><small>días · horas · minutos</small></div></div></div>
+      <div class="mock r916" style="background-image:url(img-11.jpg)"><div class="shade"></div><div class="bar"></div><div class="in" style="padding-bottom:14cqw"><span class="tag" style="color:var(--pink)">BAD 2026</span><span class="d t" style="font-size:10cqw">¿Qué set querés ver primero?</span><span class="stk">Respondé acá</span></div></div>
+    </div>
+    <div class="subh"><h3 class="h3a">Portadas de Reels</h3><span>La línea punteada marca lo que se ve en la grilla</span></div>
+    <div class="vert">
+      <div class="mock r916" style="background-image:url(img-09.jpg)"><div class="shade"></div><div class="safe"></div><div class="in" style="justify-content:center;padding-top:44cqw"><span class="tag" style="color:var(--pink)">Full Set 01</span><span class="d t">Richie<br>&nbsp;Hawtin</span><span class="s">Floralis Genérica</span></div></div>
+      <div class="mock r916 solid-k"><div class="safe"></div><div class="in" style="justify-content:center;padding-top:44cqw"><span class="tag" style="color:var(--pink)">Full Set 02</span><span class="d t">Carlita</span><span class="s">Puente de la Mujer</span></div><div style="position:absolute;left:0;right:0;top:0;height:30%" class="stripes"></div></div>
+      <div class="mock r916 solid-k"><div class="safe"></div><div class="in" style="justify-content:center;padding-top:44cqw"><span class="tag" style="color:var(--blue)">Full Set 03</span><span class="d t" style="font-size:10cqw">Indira Paganotto</span><span class="s">Caminito</span></div><div style="position:absolute;left:0;right:0;top:0;height:30%;background:repeating-linear-gradient(65deg,var(--blue) 0 7px,var(--pink) 7px 13px)"></div></div>
+      <div class="mock r916 solid-b"><div class="safe"></div><div class="in" style="justify-content:center"><span class="tag">Charla 01</span><span class="d stack" style="font-size:10cqw"><span class="blk w">Man and</span><span class="blk w">Machine</span></span><span class="s">Richie Hawtin</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 VIDEOS -->
+<section id="videos">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Ya hecho</div>
+      <h2 class="a">Tres tonos para el mismo set.</h2>
+      <p class="lede">Teasers verticales de 20 segundos del set de Richie Hawtin, cortados sobre el tempo de la música. Cada uno prueba cuánta marca poner en pantalla.</p>
+    </div>
+    <div class="vids">
+      <div class="vid"><video controls playsinline preload="metadata" poster="img-12.jpg" src="video-01.mp4"></video><div><b>Marca al frente</b><span>Bloques, borde rosa y azul sobre la Floralis real, gancho de cuatro líneas.</span></div></div>
+      <div class="vid"><video controls playsinline preload="metadata" poster="img-13.jpg" src="video-02.mp4"></video><div><b>Neutro con ritmo</b><span>Color natural, tipografía de BAD, marca sutil. La dirección actual.</span></div></div>
+      <div class="vid"><video controls playsinline preload="metadata" poster="img-14.jpg" src="video-03.mp4"></video><div><b>Minimal</b><span>Blanco y negro con la flor en rosa, tomas largas, aire de documental.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 FEE -->
+<section id="modelo">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Cómo trabajamos juntos</div>
+      <h2 class="a">Un partner, no un proveedor.</h2>
+      <p class="lede">Alumia trabaja como parte del equipo de BAD. Un fee mensual, el mismo todos los meses, todo incluido. Si aparece un anuncio de último momento, se hace.</p>
+    </div>
+    <div class="fee">
+      <div class="price">
+        <div class="card">
+          <div class="eyebrow">Fee mensual fijo</div>
+          <div class="a amt"><span class="ac">USD 2.000</span><small>por mes, de hoy hasta un mes después de BAD 2027</small></div>
+          <ul class="inc">
+            <li><b>Estrategia y calendario.</b> Plan de contenidos, líneas, textos de cada publicación.</li>
+            <li><b>Diseño.</b> Placas, carruseles, stories y portadas dentro del sistema de BAD.</li>
+            <li><b>Edición de video.</b> Teasers, reels y cortes de sets y charlas.</li>
+            <li><b>Todo incluido.</b> Las piezas del mes, sus adaptaciones y sus revisiones entran en el fee. Nada se presupuesta por separado.</li>
+          </ul>
+          <p class="note" style="font-size:.82rem">Con un criterio de uso razonable que se detalla en el acuerdo.</p>
+          
+        </div>
+      </div>
+      <div class="tablebox">
+        <table class="cmp">
+          <thead><tr><th></th><th>Por pieza</th><th>Partner</th></tr></thead>
+          <tbody>
+            <tr><td>Un pedido de más</td><td>Presupuesto aparte</td><td>Entra en la semana</td></tr>
+            <tr><td>Semana del evento</td><td>Se renegocia en el peor momento</td><td>Ya está previsto</td></tr>
+            <tr><td>Costo para BAD</td><td>Variable, difícil de prever</td><td>Uno solo, conocido de antemano</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="rules">
+      <div class="rule"><b>Prioridades semanales</b><span>Una reunión corta por semana define qué sale. Si algo no entra, se reordena, no se factura.</span></div>
+      <div class="rule"><b>Un solo canal</b><span>Pedidos y aprobaciones por un mismo lugar, con una persona de BAD que decide.</span></div>
+      <div class="rule"><b>Plantillas primero</b><span>El sistema de piezas tipo es lo que permite responder rápido sin bajar la calidad.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 PASOS -->
+<section id="pasos">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow">Para arrancar</div>
+      <h2 class="a">Próximos pasos.</h2>
+    </div>
+    <ol class="steps">
+      <li><b>Material de marca</b><span>Logo y manual en vectores y los archivos de la tipografía, para dejar de aproximarla.</span></li>
+      <li><b>El resto del archivo</b><span>Sets de Carlita e Indira Paganotto y las charlas filmadas en la Usina.</span></li>
+      <li><b>Calendario</b><span>En la primera semana, el plan completo hasta abril con fechas de estreno de cada set.</span></li>
+      <li><b>Primera tanda</b><span>Plantillas finales y el lanzamiento del set de Richie Hawtin como primera salida.</span></li>
+    </ol>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+      <img src="img-02.png" alt="BAD" style="width:130px">
+      <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap"><img src="img-03.png" alt="Alumia Studio" style="width:230px"><a class="who" href="mailto:felipe@alumiastudio.net" style="color:#fff;text-transform:none">felipe@alumiastudio.net</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="nav" aria-label="Navegación">
+  <button type="button" id="prev" aria-label="Anterior">‹</button>
+  <span id="pos">1 / 9</span>
+  <button type="button" id="next" aria-label="Siguiente">›</button>
+</div>
+
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('section')),pos=document.getElementById('pos');
+  function cur(){var y=window.scrollY+window.innerHeight*0.35,i=0;secs.forEach(function(s,k){if(s.offsetTop<=y)i=k});return i}
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));window.scrollTo({top:secs[i].offsetTop,behavior:'smooth'})}
+  function upd(){pos.textContent=(cur()+1)+' / '+secs.length}
+  document.getElementById('prev').addEventListener('click',function(){go(cur()-1)});
+  document.getElementById('next').addEventListener('click',function(){go(cur()+1)});
+  document.addEventListener('keydown',function(e){
+    if(e.target.tagName==='VIDEO')return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(cur()+1)}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur()-1)}
+  });
+  window.addEventListener('scroll',upd,{passive:true});upd();
+  var vids=[].slice.call(document.querySelectorAll('video'));
+  vids.forEach(function(v){v.addEventListener('play',function(){vids.forEach(function(o){if(o!==v)o.pause()})})});
+})();
+</script>
+</body>
+</html>
